@@ -1,0 +1,132 @@
+@import "@servicenow/sass-kit/host";
+
+.calendar--month {
+  display: grid;
+  grid-template-rows: 0.01fr 0.9fr;
+  grid-template-columns: auto;
+
+  .calendar__header {
+    display: grid;
+    grid-template-columns: 0.19fr repeat(7, 1fr);
+
+    .header__item {
+      padding: 1em 0;
+    }
+
+    .header__item:not(:nth-child(1)) {
+      padding: 1em;
+      border: 1px solid #e5e5e5;
+    }
+  }
+
+  .calendar__body {
+    display: grid;
+    grid-template-columns: 0.02fr 1fr;
+
+    .week-number {
+      .number {
+        height: calc(88vh / 6);
+        padding: 1em;
+      }
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+
+      .day {
+        height: calc(88vh / 6);
+        border: 1px solid #e5e5e5;
+        padding: 1em;
+
+        &.wrong {
+          background: #e5e5e5;
+        }
+
+        .current {
+          background: red;
+          color: #fff;
+          padding: 0.2em;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+.calendar--week {
+  display: grid;
+  grid-template-columns: 0.02fr 1fr;
+  grid-template-rows: 14vh 1fr;
+  grid-template-areas:
+    ". header"
+    "body header";
+
+  .calendar__header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-area: header;
+
+    .date-container {
+
+        border-left: 1px solid #e5e5e5;
+        border-right: 1px solid #e5e5e5;
+
+        .dates {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1em;
+            border-bottom: 1px solid #e5e5e5;
+            height: 7vh;
+            cursor: pointer;
+      
+            &:after {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 100%;
+            }
+      
+            &:hover {
+              color: RGB(var(--now-color--alert-positive-5, 15, 52, 17));
+              background-color: RGB(
+                var(--now-color--alert-positive-0, 201, 224, 202)
+              );
+            }
+
+            .date {
+                font-size: 1.5em;
+            }
+      
+            .day {
+              font-size: 0.8em;
+            }
+          }
+    }
+  }
+
+  .calendar__body {
+    display: grid;
+    grid-template-rows: auto;
+    height: 200vh;
+    font-size: 0.7em;
+    grid-area: body;
+
+    .time {
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        background-color: #e5e5e5;
+        width: 95vw;
+        height: 1px;
+        top: 7px;
+        left: 80%;
+      }
+    }
+  }
+}
